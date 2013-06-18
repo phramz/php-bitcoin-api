@@ -1,0 +1,21 @@
+{
+    "name": "phramz/php-bitcoin-api",
+    "type": "library",
+    "description": "PHP implementation of the bitcoind JSON-RPC API",
+    "keywords": ["php", "bitcoin", "json-rpc", "api"],
+    "homepage": "https://github.com/phramz/php-bitcoin-api",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Maximilian Reichel",
+            "email": "info@phramz.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3"
+    },
+    "autoload": {
+        "psr-0": { "Phramz\\Bitcoin": "src/" }
+    },
+    "minimum-stability": "dev"
+}
