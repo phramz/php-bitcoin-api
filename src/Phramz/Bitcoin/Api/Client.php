@@ -20,7 +20,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 namespace Phramz\Bitcoin\Api;
 
 use Phramz\Bitcoin\Api\Response\GetInfoResponse;
@@ -38,7 +37,18 @@ interface Client
     public function addMultiSigAddress();
 
     /**
+     * Returns an object containing various state info.
+     *
      * @return GetInfoResponse
      */
     public function getInfo();
+
+    /**
+     * If [account] is not specified, returns the server's total available balance.
+     * If [account] is specified, returns the balance in the account.
+     *
+     * @param null $account
+     * @return JsonResponse
+     */
+    public function getBalance($account = null);
 }

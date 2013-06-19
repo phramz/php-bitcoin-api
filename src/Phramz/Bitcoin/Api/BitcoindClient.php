@@ -24,8 +24,7 @@ namespace Phramz\Bitcoin\Api;
 
 use Phramz\Bitcoin\Api\Connection\Connection;
 use Phramz\Bitcoin\Api\Request\JsonRequest;
-use Phramz\Bitcoin\Api\Request\Request;
-use Phramz\Bitcoin\Api\Response\Response;
+use Phramz\Bitcoin\Api\Response\GetInfoResponse;
 
 /**
  * Class BitcoindClient
@@ -62,6 +61,20 @@ class BitcoindClient implements Client
     public function getInfo()
     {
         $request = new JsonRequest('getinfo');
+        $response = $this->connection->query($request);
+
+        return GetInfoResponse::getInstance($response);
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Client::getBalance()
+     */
+    public function getBalance($account = null)
+    {
+        $param = $account ? array($account) : array();
+
+        $request = new JsonRequest('getbalance', $param);
         $response = $this->connection->query($request);
 
         return $response;
