@@ -20,10 +20,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 namespace Phramz\Bitcoin\Api\Response;
 
-
+/**
+ * Class AbstractResponseProxy
+ * @package Phramz\Bitcoin\Api\Response
+ */
 abstract class AbstractResponseProxy extends AbstractResponse
 {
     /**
@@ -31,6 +33,9 @@ abstract class AbstractResponseProxy extends AbstractResponse
      */
     protected $response = null;
 
+    /**
+     * @param Response $response
+     */
     final private function __construct(Response $response)
     {
         $this->response = $response;
@@ -44,7 +49,6 @@ abstract class AbstractResponseProxy extends AbstractResponse
     {
         return new static($response);
     }
-
 
     /**
      * (non-PHPdoc)

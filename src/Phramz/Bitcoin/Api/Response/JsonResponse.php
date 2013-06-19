@@ -20,7 +20,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 namespace Phramz\Bitcoin\Api\Response;
 
 /**
@@ -29,8 +28,14 @@ namespace Phramz\Bitcoin\Api\Response;
  */
 class JsonResponse extends AbstractResponse
 {
+    /**
+     * @var string
+     */
     protected $json = null;
 
+    /**
+     * @param string $json The raw json response
+     */
     public function __construct($json)
     {
         $this->json = $json;
@@ -38,6 +43,9 @@ class JsonResponse extends AbstractResponse
         $this->parseJson();
     }
 
+    /**
+     * Parses the raw json response to the member variables result, error and id
+     */
     protected function parseJson()
     {
         $data = json_decode($this->json, true);

@@ -75,6 +75,8 @@ class JsonRequest implements Request
     }
 
     /**
+     * Returns the jason representation of this request
+     *
      * @return string the json string representing this request
      */
     public function toJson()

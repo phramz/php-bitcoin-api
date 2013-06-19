@@ -20,7 +20,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 namespace Phramz\Bitcoin\Api\Response;
 
 /**
@@ -30,9 +29,20 @@ namespace Phramz\Bitcoin\Api\Response;
 interface Response
 {
     /**
+     * The result data
      * @return mixed
      */
     public function getResult();
+
+    /**
+     * The error, otherwise null
+     * @return mixed
+     */
     public function getError();
+
+    /**
+     * Returns the id
+     * @return mixed
+     */
     public function getId();
 }
