@@ -20,50 +20,46 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-namespace Phramz\Bitcoin\Api;
 
-use Phramz\Bitcoin\Api\Connection\Connection;
-use Phramz\Bitcoin\Api\Request\JsonRequest;
+namespace Phramz\Bitcoin\Api\Connection;
+
+use Buzz\Browser;
 use Phramz\Bitcoin\Api\Request\Request;
-use Phramz\Bitcoin\Api\Response\Response;
+use Phramz\Bitcoin\Api\Response\JsonResponse;
 
 /**
- * Class BitcoindClient
- * @package Phramz\Bitcoin\Api
+ * Class BuzzConnection
+ * @package Phramz\Bitcoin\Api\Connection
  */
-class BitcoindClient implements Client
+class BuzzConnection extends AbstractConnection
 {
     /**
-     * @var Connection
+     * @var Browser
      */
-    protected $connection = null;
+    protected $browser = null;
 
-    /**
-     * @param Connection $connection
-     */
-    public function __construct(Connection $connection)
+    public function __construct(Browser $browser, $host, $port, $username, $password)
     {
-        $this->connection = $connection;
+        $this->browser = $browser;
+
+        parent::__construct($host, $port, $username, $password);
     }
 
     /**
      * (non-PHPdoc)
-     * @see Client::addMultiSigAddress()
+     * @see Connection::query()
      */
-    public function addMultiSigAddress()
+    public function query(Request $request)
     {
+        $response = $this->browser->post(
+            'http://'. $this->host . ':' . $this->port,
+            array (
+                'Content-type' => 'application/json',
+                'Authorization: Basic '.base64_encode($this->username.':'.$this->password)
+            ),
+            $request->getContent()
+        );
 
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see Client::getInfo()
-     */
-    public function getInfo()
-    {
-        $request = new JsonRequest('getinfo');
-        $response = $this->connection->query($request);
-
-        return $response;
+        return new JsonResponse($response->getContent());
     }
 }

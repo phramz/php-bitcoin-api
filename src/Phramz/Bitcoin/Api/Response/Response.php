@@ -45,4 +45,9 @@ interface Response
      * @return mixed
      */
     public function getId();
+
+    /**
+     * @return mixed the raw content
+     */
+    public function getContent();
 }

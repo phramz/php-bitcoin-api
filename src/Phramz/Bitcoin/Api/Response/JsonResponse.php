@@ -31,14 +31,14 @@ class JsonResponse extends AbstractResponse
     /**
      * @var string
      */
-    protected $json = null;
+    protected $content = null;
 
     /**
      * @param string $json The raw json response
      */
     public function __construct($json)
     {
-        $this->json = $json;
+        $this->content = $json;
 
         $this->parseJson();
     }
@@ -48,7 +48,7 @@ class JsonResponse extends AbstractResponse
      */
     protected function parseJson()
     {
-        $data = json_decode($this->json, true);
+        $data = json_decode($this->content, true);
 
         $this->result = isset($data['result']) ? $data['result'] : null;
         $this->error = isset($data['error']) ? $data['error'] : null;

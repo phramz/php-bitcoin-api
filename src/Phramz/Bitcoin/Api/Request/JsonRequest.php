@@ -44,10 +44,10 @@ class JsonRequest implements Request
         $this->method = $method;
         $this->params = $params;
     }
+
     /**
-     * Returns the method name
-     *
-     * @return string method name
+     * (non-PHPdoc)
+     * @see Request::getMethod()
      */
     public function getMethod()
     {
@@ -55,9 +55,8 @@ class JsonRequest implements Request
     }
 
     /**
-     * Returns the parameters as array
-     *
-     * @return array parameters array
+     * (non-PHPdoc)
+     * @see Request::getParams()
      */
     public function getParams()
     {
@@ -65,13 +64,21 @@ class JsonRequest implements Request
     }
 
     /**
-     * Returns the id of this request
-     *
-     * @return mixed the id
+     * (non-PHPdoc)
+     * @see Request::getId()
      */
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Request::getContent()
+     */
+    public function getContent()
+    {
+        return $this->toJson();
     }
 
     /**

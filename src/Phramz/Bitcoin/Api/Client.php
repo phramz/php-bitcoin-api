@@ -23,8 +23,8 @@
 
 namespace Phramz\Bitcoin\Api;
 
-use Phramz\Bitcoin\Api\Connection\Connection;
-use Phramz\Bitcoin\Api\Request\Request;
+use Phramz\Bitcoin\Api\Response\GetInfoResponse;
+use Phramz\Bitcoin\Api\Response\JsonResponse;
 
 /**
  * Class Client
@@ -32,9 +32,13 @@ use Phramz\Bitcoin\Api\Request\Request;
  */
 interface Client
 {
-    public function query(Request $request, Connection $connection);
-
+    /**
+     * @return JsonResponse
+     */
     public function addMultiSigAddress();
 
+    /**
+     * @return GetInfoResponse
+     */
     public function getInfo();
 }

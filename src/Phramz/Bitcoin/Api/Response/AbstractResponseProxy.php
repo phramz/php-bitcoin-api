@@ -76,4 +76,13 @@ abstract class AbstractResponseProxy extends AbstractResponse
     {
         return $this->response->getId();
     }
+
+    /**
+     * (non-PHPdoc)
+     * @see Response::getContent()
+     */
+    public function getContent()
+    {
+        return $this->response->getContent();
+    }
 }

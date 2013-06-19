@@ -22,15 +22,17 @@
  */
 namespace Phramz\Bitcoin\Api\Connection;
 
+use Phramz\Bitcoin\Api\Request\Request;
+
 /**
  * Class Connection
  * @package Phramz\Bitcoin\Api\Connection
  */
 interface Connection
 {
-    public function setHost($host);
-    public function setPort($port);
-    public function setUser($user);
-    public function setPassword($password);
-    public function query(Request $message);
+    public function getHost();
+    public function getPort();
+    public function getUsername();
+    public function getPassword();
+    public function query(Request $request);
 }

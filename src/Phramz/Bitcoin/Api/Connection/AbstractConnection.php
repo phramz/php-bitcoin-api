@@ -20,50 +20,67 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-namespace Phramz\Bitcoin\Api;
 
-use Phramz\Bitcoin\Api\Connection\Connection;
-use Phramz\Bitcoin\Api\Request\JsonRequest;
-use Phramz\Bitcoin\Api\Request\Request;
-use Phramz\Bitcoin\Api\Response\Response;
+namespace Phramz\Bitcoin\Api\Connection;
 
 /**
- * Class BitcoindClient
- * @package Phramz\Bitcoin\Api
+ * Class AbstractConnection
+ * @package Phramz\Bitcoin\Api\Connection
  */
-class BitcoindClient implements Client
+abstract class AbstractConnection implements Connection
 {
-    /**
-     * @var Connection
-     */
-    protected $connection = null;
+    protected $username = null;
+    protected $password = null;
+    protected $host = null;
+    protected $port = null;
 
     /**
-     * @param Connection $connection
+     * @param string $host
+     * @param string $port
+     * @param string $username
+     * @param string $password
      */
-    public function __construct(Connection $connection)
+    public function __construct($host, $port, $username, $password)
     {
-        $this->connection = $connection;
+        $this->host = $host;
+        $this->port = $port;
+        $this->username = $username;
+        $this->password = $password;
     }
 
     /**
      * (non-PHPdoc)
-     * @see Client::addMultiSigAddress()
+     * @see Connection::getHost()
      */
-    public function addMultiSigAddress()
+    public function getHost()
     {
-
+        return $this->host;
     }
 
     /**
      * (non-PHPdoc)
-     * @see Client::getInfo()
+     * @see Connection::getPassword()
      */
-    public function getInfo()
+    public function getPassword()
     {
-        $request = new JsonRequest('getinfo');
-        $response = $this->connection->query($request);
+        return $this->password;
+    }
 
-        return $response;
+    /**
+     * (non-PHPdoc)
+     * @see Connection::getPort()
+     */
+    public function getPort()
+    {
+        return $this->port;
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Connection::getUsername()
+     */
+    public function getUsername()
+    {
+        return $this->username;
     }
 }

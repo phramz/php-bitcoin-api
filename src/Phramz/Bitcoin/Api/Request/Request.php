@@ -50,8 +50,7 @@ interface Request
     public function getId();
 
     /**
-     * @return string the json string representing this request
+     * @return mixed the raw content of the request
      */
-    public function toJson();
-
+    public function getContent();
 }

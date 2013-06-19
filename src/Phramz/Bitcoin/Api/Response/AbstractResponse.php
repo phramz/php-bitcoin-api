@@ -32,6 +32,7 @@ abstract class AbstractResponse implements Response
     protected $result = null;
     protected $error = null;
     protected $id = null;
+    protected $content = null;
 
     /**
      * Returns a result-value by key
@@ -72,5 +73,14 @@ abstract class AbstractResponse implements Response
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Response::getContent()
+     */
+    public function getContent()
+    {
+        return $this->content;
     }
 }
