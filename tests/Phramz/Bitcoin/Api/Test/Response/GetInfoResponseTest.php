@@ -32,18 +32,29 @@ use Phramz\Bitcoin\Api\Response\GetInfoResponse;
  */
 class GetInfoResponseTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var \PHPUnit_Framework_MockObject_MockObject
+     */
+    protected $response = null;
 
     /**
-     * @param string $json
+     * @var GetInfoResponse
      */
-    public function testGetInstance()
+    protected $getInfoResponse = null;
+
+    public function setUp()
     {
+        $data = json_decode(
+            '{"result":{"version":80202,"protocolversion":70001,"walletversion":60000,"balance":0.00000000,"blocks":224314,"timeoffset":-1,"connections":8,"proxy":"","difficulty":4367876.00084220,"testnet":false,"keypoololdest":1371414441,"keypoolsize":101,"paytxfee":0.00000000,"errors":""},"error":"bar","id":"bazz"}',
+            true
+        );
+
         $response = $this->getMockBuilder('Phramz\Bitcoin\Api\Response\Response')
             ->getMockForAbstractClass();
 
         $response->expects($this->any())
             ->method('getResult')
-            ->will($this->returnValue('foo'));
+            ->will($this->returnValue($data['result']));
 
         $response->expects($this->any())
             ->method('getError')
@@ -53,19 +64,108 @@ class GetInfoResponseTest extends \PHPUnit_Framework_TestCase
             ->method('getId')
             ->will($this->returnValue('bazz'));
 
-        $test = GetInfoResponse::getInstance($response);
+        $this->response = $response;
+        $this->getInfoResponse = GetInfoResponse::getInstance($response);
+    }
+
+    /**
+     * @param string $json
+     */
+    public function testGetInstance()
+    {
+        $test = $this->getInfoResponse;
 
         $this->assertInstanceOf('Phramz\Bitcoin\Api\Response\Response', $test);
 
-        $this->assertEquals('foo', $test->getResult());
+        $result = array (
+            'version' => 80202,
+            'protocolversion' => 70001,
+            'walletversion' => 60000,
+            'balance' => 0,
+            'blocks' => 224314,
+            'timeoffset' => -1,
+            'connections' => 8,
+            'proxy' => '',
+            'difficulty' => 4367876.0008422,
+            'testnet' => false,
+            'keypoololdest' => 1371414441,
+            'keypoolsize' => 101,
+            'paytxfee' => 0,
+            'errors' => ''
+        );
+
+        $this->assertEquals($result, $test->getResult());
         $this->assertEquals('bar', $test->getError());
         $this->assertEquals('bazz', $test->getId());
     }
 
-    public function jsonDataProvider()
+    public function testGetErrors()
     {
-        return array(
-            array('{"result":{"version":80202,"protocolversion":70001,"walletversion":60000,"balance":0.00000000,"blocks":224314,"timeoffset":-1,"connections":8,"proxy":"","difficulty":4367876.00084220,"testnet":false,"keypoololdest":1371414441,"keypoolsize":101,"paytxfee":0.00000000,"errors":""},"error":null,"id":"curltest"}')
-        );
+        $this->assertEquals('', $this->getInfoResponse->getErrors());
+    }
+
+    public function testgetPayTxFee()
+    {
+        $this->assertEquals(0, $this->getInfoResponse->getPayTxFee());
+    }
+
+    public function testGetKeypoolSize()
+    {
+        $this->assertEquals(101, $this->getInfoResponse->getKeypoolSize());
+    }
+
+    public function testGetKeypoololdest()
+    {
+        $this->assertEquals(1371414441, $this->getInfoResponse->getKeypoolOldest());
+    }
+
+    public function testGetTestnet()
+    {
+        $this->assertEquals(false, $this->getInfoResponse->getTestnet());
+    }
+
+    public function testGetDifficulty()
+    {
+        $this->assertEquals(4367876.0008422, $this->getInfoResponse->getDifficulty());
+    }
+
+    public function testGetProxy()
+    {
+        $this->assertEquals('', $this->getInfoResponse->getProxy());
+    }
+
+    public function testGetConnections()
+    {
+        $this->assertEquals(8, $this->getInfoResponse->getConnections());
+    }
+
+    public function testGetTimeOffset()
+    {
+        $this->assertEquals(-1, $this->getInfoResponse->getTimeOffset());
+    }
+
+    public function testGetBlocks()
+    {
+        $this->assertEquals('224314', $this->getInfoResponse->getBlocks());
+    }
+
+    public function testGetWalletVersion()
+    {
+        $this->assertEquals('60000', $this->getInfoResponse->getWalletVersion());
+    }
+
+    public function testGetVersion()
+    {
+        $this->assertEquals('80202', $this->getInfoResponse->getVersion());
+    }
+
+    public function testGetBalance()
+    {
+        $this->assertEquals(0.00000000, $this->getInfoResponse->getBalance());
+    }
+
+    public function testGetProtocolVersion()
+    {
+        $this->assertEquals(70001, $this->getInfoResponse->getProtocolVersion());
     }
 }
