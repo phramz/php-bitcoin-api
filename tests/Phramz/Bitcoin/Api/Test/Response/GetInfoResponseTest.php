@@ -24,13 +24,14 @@
 namespace Phramz\Bitcoin\Api\Test\Response;
 
 use Phramz\Bitcoin\Api\Response\GetInfoResponse;
+use Phramz\Bitcoin\Api\Test\AbstractTestCase;
 
 /**
  * Class GetInfoResponse
  * @package Phramz\Bitcoin\Api\Test\Response
  * @covers Phramz\Bitcoin\Api\Response\GetInfoResponse<extended>
  */
-class GetInfoResponseTest extends \PHPUnit_Framework_TestCase
+class GetInfoResponseTest extends AbstractTestCase
 {
     /**
      * @var \PHPUnit_Framework_MockObject_MockObject
@@ -44,10 +45,7 @@ class GetInfoResponseTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $data = json_decode(
-            '{"result":{"version":80202,"protocolversion":70001,"walletversion":60000,"balance":0.00000000,"blocks":224314,"timeoffset":-1,"connections":8,"proxy":"","difficulty":4367876.00084220,"testnet":false,"keypoololdest":1371414441,"keypoolsize":101,"paytxfee":0.00000000,"errors":""},"error":"bar","id":"bazz"}',
-            true
-        );
+        $data = $this->getJsonFixture('response_getinfo');
 
         $response = $this->getMockBuilder('Phramz\Bitcoin\Api\Response\Response')
             ->getMockForAbstractClass();
@@ -68,9 +66,6 @@ class GetInfoResponseTest extends \PHPUnit_Framework_TestCase
         $this->getInfoResponse = GetInfoResponse::getInstance($response);
     }
 
-    /**
-     * @param string $json
-     */
     public function testGetInstance()
     {
         $test = $this->getInfoResponse;
