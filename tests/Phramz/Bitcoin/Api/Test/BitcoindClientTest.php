@@ -100,6 +100,5 @@ class BitcoindClientTest extends AbstractTestCase
 
         $this->assertEquals($this->fixture['error'], $response->getError());
         $this->assertEquals($this->fixture['result'], $response->getResult());
-
     }
 }

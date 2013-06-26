@@ -79,4 +79,60 @@ class BitcoindClient implements Client
 
         return $response;
     }
+
+    /**
+     * (non-PHPdoc)
+     * @see Client::listAccounts()
+     */
+    public function listAccounts($minconf = 1)
+    {
+        $param = $minconf ? array($minconf) : array();
+
+        $request = new JsonRequest('listaccounts', $param);
+        $response = $this->connection->query($request);
+
+        return $response;
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Client::getNewAddress()
+     */
+    public function getNewAddress($account = null)
+    {
+        $param = $account ? array($account) : array();
+
+        $request = new JsonRequest('getnewaddress', $param);
+        $response = $this->connection->query($request);
+
+        return $response;
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Client::getAddressesByAccount()
+     */
+    public function getAddressesByAccount($account = null)
+    {
+        $param = $account ? array($account) : array();
+
+        $request = new JsonRequest('getaddressesbyaccount', $param);
+        $response = $this->connection->query($request);
+
+        return $response;
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Client::sendToAddress()
+     */
+    public function sendToAddress($bitcoinaddress, $amount, $comment = '', $commentTo = '')
+    {
+        $param = array($bitcoinaddress, $amount, $comment, $commentTo);
+
+        $request = new JsonRequest('sendtoaddress', $param);
+        $response = $this->connection->query($request);
+
+        return $response;
+    }
 }

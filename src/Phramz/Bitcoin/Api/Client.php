@@ -47,8 +47,46 @@ interface Client
      * If [account] is not specified, returns the server's total available balance.
      * If [account] is specified, returns the balance in the account.
      *
-     * @param null $account
+     * @param string $account
      * @return JsonResponse
      */
     public function getBalance($account = null);
+
+    /**
+     * Returns Object that has account names as keys, account balances as values.
+     *
+     * @param int $minconf
+     * @return JsonResponse
+     */
+    public function listAccounts($minconf = 1);
+
+    /**
+     * Returns a new Bitcoin address for receiving payments.
+     * If [account] is specified (recommended), it is added to the address book so payments
+     * received with the address will be credited to [account].
+     *
+     * @param string $account
+     * @return JsonResponse
+     */
+    public function getNewAddress($account = null);
+
+    /**
+     * Returns the list of addresses for the given account.
+     *
+     * @param string $account
+     * @return JsonResponse
+     */
+    public function getAddressesByAccount($account);
+
+    /**
+     * Send <amount> of Bitcoins to <bitcoinaddress>
+     * <amount> is a real and is rounded to the nearest 0.00000001
+     *
+     * @param string $bitcoinaddress
+     * @param double $amount
+     * @param string $comment
+     * @param string $commentTo
+     * @return JsonResponse
+     */
+    public function sendToAddress($bitcoinaddress, $amount, $comment = '', $commentTo = '');
 }
