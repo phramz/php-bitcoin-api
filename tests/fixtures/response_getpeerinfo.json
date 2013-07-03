@@ -1,0 +1,17 @@
+[
+    {
+        "addr" : "127.0.0.1:43413",
+        "services" : "00000001",
+        "lastsend" : 1372863607,
+        "lastrecv" : 1372863607,
+        "bytessent" : 2194,
+        "bytesrecv" : 1285,
+        "conntime" : 1372858206,
+        "version" : 70001,
+        "subver" : "/Satoshi:0.8.2.2/",
+        "inbound" : true,
+        "startingheight" : 56101,
+        "banscore" : 0,
+        "syncnode" : true
+    }
+]

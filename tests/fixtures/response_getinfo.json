@@ -15,6 +15,6 @@
         "paytxfee": 0.00000000,
         "errors": ""
     },
-    "error": "bar",
+    "error": null,
     "id": "bazz"
 }

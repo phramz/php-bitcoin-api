@@ -23,10 +23,10 @@
 namespace Phramz\Bitcoin\Api\Response;
 
 /**
- * Class GetInfoResponse
+ * Class ServerInfo
  * @package Phramz\Bitcoin\Api\Response
  */
-class GetInfoResponse extends AbstractResponseProxy
+class ServerInfo extends AbstractResponseProxy
 {
     /**
      * Returns the Version

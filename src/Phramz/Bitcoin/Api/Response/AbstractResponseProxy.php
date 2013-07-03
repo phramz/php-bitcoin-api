@@ -43,7 +43,7 @@ abstract class AbstractResponseProxy extends AbstractResponse
 
     /**
      * @param Response $response
-     * @return GetInfoResponse
+     * @return AbstractResponseProxy
      */
     final public static function getInstance(Response $response)
     {

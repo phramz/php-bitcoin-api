@@ -20,25 +20,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-namespace Phramz\Bitcoin\Api\Connection;
 
-use Phramz\Bitcoin\Api\Request\Request;
-use Phramz\Bitcoin\Api\Response\Response;
+namespace Phramz\Bitcoin\Api\Exception;
 
-/**
- * Class Connection
- * @package Phramz\Bitcoin\Api\Connection
- */
-interface Connection
+class BitcoinException extends \RuntimeException
 {
-    public function getHost();
-    public function getPort();
-    public function getUsername();
-    public function getPassword();
-
-    /**
-     * @param Request $request
-     * @return Response
-     */
-    public function query(Request $request);
 }

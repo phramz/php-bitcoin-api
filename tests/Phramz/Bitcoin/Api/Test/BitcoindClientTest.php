@@ -83,7 +83,7 @@ class BitcoindClientTest extends AbstractTestCase
         $test = new BitcoindClient($this->connection);
         $response = $test->getInfo();
 
-        $this->assertInstanceOf('Phramz\Bitcoin\Api\Response\GetInfoResponse', $response);
+        $this->assertInstanceOf('Phramz\Bitcoin\Api\Response\ServerInfo', $response);
         $this->assertEquals($this->fixture, $response->getContent());
 
         $this->assertEquals($this->fixture['error'], $response->getError());

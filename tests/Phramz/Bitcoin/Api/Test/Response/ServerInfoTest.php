@@ -20,18 +20,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 namespace Phramz\Bitcoin\Api\Test\Response;
 
-use Phramz\Bitcoin\Api\Response\GetInfoResponse;
+use Phramz\Bitcoin\Api\Response\ServerInfo;
 use Phramz\Bitcoin\Api\Test\AbstractTestCase;
 
 /**
- * Class GetInfoResponse
+ * Class ServerInfoTest
  * @package Phramz\Bitcoin\Api\Test\Response
- * @covers Phramz\Bitcoin\Api\Response\GetInfoResponse<extended>
+ * @covers Phramz\Bitcoin\Api\Response\ServerInfo<extended>
  */
-class GetInfoResponseTest extends AbstractTestCase
+class ServerInfoTest extends AbstractTestCase
 {
     /**
      * @var \PHPUnit_Framework_MockObject_MockObject
@@ -39,7 +38,7 @@ class GetInfoResponseTest extends AbstractTestCase
     protected $response = null;
 
     /**
-     * @var GetInfoResponse
+     * @var ServerInfo
      */
     protected $getInfoResponse = null;
 
@@ -63,7 +62,7 @@ class GetInfoResponseTest extends AbstractTestCase
             ->will($this->returnValue('bazz'));
 
         $this->response = $response;
-        $this->getInfoResponse = GetInfoResponse::getInstance($response);
+        $this->getInfoResponse = ServerInfo::getInstance($response);
     }
 
     public function testGetInstance()
