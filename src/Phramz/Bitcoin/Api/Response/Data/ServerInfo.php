@@ -20,13 +20,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-namespace Phramz\Bitcoin\Api\Response;
+namespace Phramz\Bitcoin\Api\Response\Data;
 
 /**
  * Class ServerInfo
- * @package Phramz\Bitcoin\Api\Response
+ * @package Phramz\Bitcoin\Api\Response\Data
  */
-class ServerInfo extends AbstractResponseProxy
+class ServerInfo extends AbstractData
 {
     /**
      * Returns the Version
@@ -113,7 +113,7 @@ class ServerInfo extends AbstractResponseProxy
      * Returns true if testnet is true
      * @return boolean
      */
-    public function getTestnet()
+    public function isTestnet()
     {
         return $this->getValue('testnet');
     }

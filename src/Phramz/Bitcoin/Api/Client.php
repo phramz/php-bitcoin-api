@@ -22,7 +22,8 @@
  */
 namespace Phramz\Bitcoin\Api;
 
-use Phramz\Bitcoin\Api\Response\ServerInfo;
+use Phramz\Bitcoin\Api\Response\Data\MiningInfo;
+use Phramz\Bitcoin\Api\Response\Data\ServerInfo;
 use Phramz\Bitcoin\Api\Response\JsonResponse;
 
 /**
@@ -320,7 +321,7 @@ interface Client
      * getmininginfo
      * Returns an object containing mining-related information.
      *
-     * @return GetMiningInfoResponse
+     * @return MiningInfo
      * @throws Exception\BitcoinException
      */
     public function getMiningInfo();
@@ -329,7 +330,7 @@ interface Client
      * getpeerinfo
      * Returns data about each connected network node.
      *
-     * @return GetPeerInfoResponse
+     * @return PeerInfo
      * @throws Exception\BitcoinException
      */
     public function getPeerInfo();

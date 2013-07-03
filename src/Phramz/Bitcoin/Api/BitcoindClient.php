@@ -26,7 +26,7 @@ use Phramz\Bitcoin\Api\Connection\Connection;
 use Phramz\Bitcoin\Api\Exception\BitcoinException;
 use Phramz\Bitcoin\Api\Request\JsonRequest;
 use Phramz\Bitcoin\Api\Request\Request;
-use Phramz\Bitcoin\Api\Response\ServerInfo;
+use Phramz\Bitcoin\Api\Response\Data\ServerInfo;
 
 /**
  * Class BitcoindClient
@@ -56,7 +56,7 @@ class BitcoindClient implements Client
         $request = new JsonRequest('getinfo');
         $response = $this->query($request);
 
-        return ServerInfo::getInstance($response);
+        return new ServerInfo($response->getResult());
     }
 
     /**
