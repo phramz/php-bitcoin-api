@@ -98,4 +98,12 @@ class BitcoindClientTest extends AbstractTestCase
 
         $this->assertEquals($this->fixture['result'], $test->getBalance());
     }
+
+    public function testListAccounts()
+    {
+        $test = new BitcoindClient($this->connection);
+        $this->setUpFixture('response_listaccounts');
+
+        $this->assertEquals($this->fixture['result'], $test->listAccounts());
+    }
 }
