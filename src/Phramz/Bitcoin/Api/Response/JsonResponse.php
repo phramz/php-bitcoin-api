@@ -21,6 +21,7 @@
  * THE SOFTWARE.
  */
 namespace Phramz\Bitcoin\Api\Response;
+use Phramz\Bitcoin\Api\Exception\BitcoinException;
 
 /**
  * Class JsonResponse
@@ -35,12 +36,17 @@ class JsonResponse extends AbstractResponse
 
     /**
      * @param string $json The raw json response
+     * @throws BitcoinException
      */
     public function __construct($json)
     {
         $this->content = $json;
 
         $this->parseJson();
+
+        if (!$this->getId()) {
+            throw new BitcoinException("unexpected reponse data: " . $json);
+        }
     }
 
     /**
