@@ -20,44 +20,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
 namespace Phramz\Bitcoin\Api\Response\Data;
 
 /**
- * Class AbstractData
+ * Class Block
  * @package Phramz\Bitcoin\Api\Response\Data
  */
-abstract class AbstractData
+class Block extends AbstractData
 {
-    protected $data = array();
 
-    /**
-     * @param array $data
-     */
-    public function __construct(array $data)
-    {
-        $this->data = $data;
-    }
-
-    /**
-     * Returns a result-value by key
-     *
-     * @param string $key
-     * @param mixed $default
-     * @return mixed
-     */
-    public function getValue($key, $default = null)
-    {
-        return isset($this->data[$key]) ? $this->data[$key] : $default;
-    }
-
-    /**
-     * Returns a result-value as DateTime - object by key
-     *
-     * @param $key
-     * @return \DateTime|null
-     */
-    public function getValueAsDateTime($key)
-    {
-        return isset($this->data[$key]) ? \DateTime::createFromFormat('U', $this->data[$key]) : null;
-    }
 }

@@ -22,6 +22,7 @@
  */
 namespace Phramz\Bitcoin\Api;
 
+use Phramz\Bitcoin\Api\Response\Data\Block;
 use Phramz\Bitcoin\Api\Response\Data\MiningInfo;
 use Phramz\Bitcoin\Api\Response\Data\ServerInfo;
 use Phramz\Bitcoin\Api\Response\JsonResponse;
@@ -100,7 +101,7 @@ interface Client
      *
      * @param string $account
      * @param int $minconf
-     * @return JsonResponse
+     * @return float
      * @throws Exception\BitcoinException
      */
     public function getBalance($account = null, $minconf = 1);
@@ -109,7 +110,7 @@ interface Client
      * Returns Object that has account names as keys, account balances as values.
      *
      * @param int $minconf
-     * @return JsonResponse
+     * @return array of {"account" => balance}
      * @throws Exception\BitcoinException
      */
     public function listAccounts($minconf = 1);
@@ -120,7 +121,7 @@ interface Client
      * received with the address will be credited to [account].
      *
      * @param string $account
-     * @return JsonResponse
+     * @return string
      * @throws Exception\BitcoinException
      */
     public function getNewAddress($account = null);
@@ -130,7 +131,7 @@ interface Client
      * Returns the list of addresses for the given account.
      *
      * @param string $account
-     * @return JsonResponse
+     * @return array of accounts
      * @throws Exception\BitcoinException
      */
     public function getAddressesByAccount($account);
@@ -143,7 +144,7 @@ interface Client
      * @param double $amount
      * @param string $comment
      * @param string $commentTo
-     * @return JsonResponse
+     * @return string txid
      * @throws Exception\BitcoinException
      */
     public function sendToAddress($bitcoinaddress, $amount, $comment = '', $commentTo = '');
@@ -233,7 +234,7 @@ interface Client
      * Returns details of a block with given block-hash.
      *
      * @param string $hash
-     * @return JsonResponse
+     * @return Block
      * @throws Exception\BitcoinException
      */
     public function getBlock($hash);
@@ -242,7 +243,7 @@ interface Client
      * getblockcount
      * Returns the number of blocks in the longest block chain.
      *
-     * @return JsonResponse
+     * @return integer
      * @throws Exception\BitcoinException
      */
     public function getBlockCount();
@@ -252,7 +253,7 @@ interface Client
      * Returns hash of block in best-block-chain at <index>.
      *
      * @param int $index
-     * @return JsonResponse
+     * @return string
      * @throws Exception\BitcoinException
      */
     public function getBlockHash($index);
@@ -284,17 +285,19 @@ interface Client
     public function getBlockTemplate(array $params);
 
     /**
+     * getconncount
      * Returns the number of connections to other nodes.
      *
-     * @return JsonResponse
+     * @return integer
      * @throws Exception\BitcoinException
      */
     public function getConnectionCount();
 
     /**
+     * getdifficulty
      * Returns the proof-of-work difficulty as a multiple of the minimum difficulty.
      *
-     * @return JsonResponse
+     * @return double
      * @throws Exception\BitcoinException
      */
     public function getDifficulty();
@@ -330,7 +333,7 @@ interface Client
      * getpeerinfo
      * Returns data about each connected network node.
      *
-     * @return PeerInfo
+     * @return array of PeerInfo
      * @throws Exception\BitcoinException
      */
     public function getPeerInfo();

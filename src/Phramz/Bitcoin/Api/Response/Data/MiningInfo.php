@@ -50,14 +50,14 @@ class MiningInfo extends AbstractData
      * Returns the current block-transactions
      * @return integer
      */
-    public function getWalletVersion()
+    public function getCurrentBlockTx()
     {
         return $this->getValue('currentblocktx');
     }
 
     /**
      * Returns the difficulty
-     * @return float
+     * @return double
      */
     public function getDifficulty()
     {
@@ -65,7 +65,16 @@ class MiningInfo extends AbstractData
     }
 
     /**
-     * Returns the block count
+     * Returns collected error information
+     * @return string
+     */
+    public function getErrors()
+    {
+        return $this->getValue('errors');
+    }
+
+    /**
+     * Returns TRUE if block-generation is enabled
      * @return boolean
      */
     public function isGenerate()
@@ -107,14 +116,5 @@ class MiningInfo extends AbstractData
     public function isTestnet()
     {
         return $this->getValue('testnet');
-    }
-
-    /**
-     * Returns collected error information
-     * @return string
-     */
-    public function getErrors()
-    {
-        return $this->getValue('errors');
     }
 }

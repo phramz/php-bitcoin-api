@@ -28,4 +28,107 @@ namespace Phramz\Bitcoin\Api\Response\Data;
  */
 class PeerInfo extends AbstractData
 {
+    /**
+     * @return string
+     */
+    public function getAddress()
+    {
+        return $this->getValue('addr');
+    }
+
+    /**
+     * @return string
+     */
+    public function getServices()
+    {
+        return $this->getValue('services');
+    }
+
+    /**
+     * @return \DateTime|null
+     */
+    public function getLastSend()
+    {
+        return $this->getValueAsDateTime('lastsend');
+    }
+
+    /**
+     * @return \DateTime|null
+     */
+    public function getLastReceived()
+    {
+        return $this->getValueAsDateTime('lastrecv');
+    }
+
+    /**
+     * @return integer
+     */
+    public function getBytesSend()
+    {
+        return $this->getValue('bytessent');
+    }
+
+    /**
+     * @return integer
+     */
+    public function getBytesReceived()
+    {
+        return $this->getValue('bytesrecv');
+    }
+
+    /**
+     * @return \DateTime|null
+     */
+    public function getConnectTime()
+    {
+        return $this->getValueAsDateTime('conntime');
+    }
+
+    /**
+     * @return integer
+     */
+    public function getVersion()
+    {
+        return $this->getValue('version');
+    }
+
+    /**
+     * @return string
+     */
+    public function getSubVersion()
+    {
+        return $this->getValue('subver');
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isInbound()
+    {
+        return $this->getValue('inbound', false);
+    }
+
+    /**
+     * @return integer
+     */
+    public function getStartingHeight()
+    {
+        return $this->getValue('startingheight');
+    }
+
+    /**
+     * @return integer
+     */
+    public function getBanScore()
+    {
+        return $this->getValue('banscore');
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isSyncNode()
+    {
+        return $this->getValue('syncnode', false);
+    }
 }

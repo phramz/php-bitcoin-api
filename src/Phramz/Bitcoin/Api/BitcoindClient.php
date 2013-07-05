@@ -26,6 +26,9 @@ use Phramz\Bitcoin\Api\Connection\Connection;
 use Phramz\Bitcoin\Api\Exception\BitcoinException;
 use Phramz\Bitcoin\Api\Request\JsonRequest;
 use Phramz\Bitcoin\Api\Request\Request;
+use Phramz\Bitcoin\Api\Response\Data\Block;
+use Phramz\Bitcoin\Api\Response\Data\MiningInfo;
+use Phramz\Bitcoin\Api\Response\Data\PeerInfo;
 use Phramz\Bitcoin\Api\Response\Data\ServerInfo;
 
 /**
@@ -73,7 +76,7 @@ class BitcoindClient implements Client
         $request = new JsonRequest('getbalance', $param);
         $response = $this->query($request);
 
-        return $response;
+        return $response->getResult();
     }
 
     /**
@@ -87,7 +90,7 @@ class BitcoindClient implements Client
         $request = new JsonRequest('listaccounts', $param);
         $response = $this->query($request);
 
-        return $response;
+        return $response->getResult();
     }
 
     /**
@@ -101,7 +104,7 @@ class BitcoindClient implements Client
         $request = new JsonRequest('getnewaddress', $param);
         $response = $this->query($request);
 
-        return $response;
+        return $response->getResult();
     }
 
     /**
@@ -115,7 +118,7 @@ class BitcoindClient implements Client
         $request = new JsonRequest('getaddressesbyaccount', $param);
         $response = $this->query($request);
 
-        return $response;
+        return $response->getResult();
     }
 
     /**
@@ -129,7 +132,7 @@ class BitcoindClient implements Client
         $request = new JsonRequest('sendtoaddress', $param);
         $response = $this->query($request);
 
-        return $response;
+        return $response->getResult();
     }
 
     /**
@@ -156,7 +159,12 @@ class BitcoindClient implements Client
      */
     public function addNode($node, $action = self::NODE_ADD)
     {
-        // TODO: Implement addNode() method.
+        $param = array($node, $action);
+
+        $request = new JsonRequest('addnode', $param);
+        $response = $this->query($request);
+
+        return $response;
     }
 
     /**
@@ -237,7 +245,12 @@ class BitcoindClient implements Client
      */
     public function getBlock($hash)
     {
-        // TODO: Implement getBlock() method.
+        $param = array($hash);
+
+        $request = new JsonRequest('getblock', $param);
+        $response = $this->query($request);
+
+        return new Block($response->getResult());
     }
 
     /**
@@ -246,7 +259,10 @@ class BitcoindClient implements Client
      */
     public function getBlockCount()
     {
-        // TODO: Implement getBlockCount() method.
+        $request = new JsonRequest('getblockcount');
+        $response = $this->query($request);
+
+        return $response->getResult();
     }
 
     /**
@@ -255,7 +271,12 @@ class BitcoindClient implements Client
      */
     public function getBlockHash($index)
     {
-        // TODO: Implement getBlockHash() method.
+        $param = array($index);
+
+        $request = new JsonRequest('getblockhash', $param);
+        $response = $this->query($request);
+
+        return $response->getResult();
     }
 
     /**
@@ -273,7 +294,10 @@ class BitcoindClient implements Client
      */
     public function getConnectionCount()
     {
-        // TODO: Implement getConnectionCount() method.
+        $request = new JsonRequest('getconnectioncount');
+        $response = $this->query($request);
+
+        return $response->getResult();
     }
 
     /**
@@ -282,7 +306,10 @@ class BitcoindClient implements Client
      */
     public function getDifficulty()
     {
-        // TODO: Implement getDifficulty() method.
+        $request = new JsonRequest('getdifficulty');
+        $response = $this->query($request);
+
+        return $response->getResult();
     }
 
     /**
@@ -291,7 +318,10 @@ class BitcoindClient implements Client
      */
     public function isGenerate()
     {
-        // TODO: Implement isGenerate() method.
+        $request = new JsonRequest('getgenerate');
+        $response = $this->query($request);
+
+        return $response->getResult();
     }
 
     /**
@@ -300,7 +330,10 @@ class BitcoindClient implements Client
      */
     public function getHashesPerSecond()
     {
-        // TODO: Implement getHashesPerSecond() method.
+        $request = new JsonRequest('gethashespersec');
+        $response = $this->query($request);
+
+        return $response->getResult();
     }
 
     /**
@@ -309,7 +342,10 @@ class BitcoindClient implements Client
      */
     public function getMiningInfo()
     {
-        // TODO: Implement getMiningInfo() method.
+        $request = new JsonRequest('getmininginfo');
+        $response = $this->query($request);
+
+        return new MiningInfo($response->getResult());
     }
 
     /**
@@ -318,7 +354,17 @@ class BitcoindClient implements Client
      */
     public function getPeerInfo()
     {
-        // TODO: Implement getPeerInfo() method.
+        $request = new JsonRequest('getpeerinfo');
+        $response = $this->query($request);
+
+        $peers = array();
+        foreach ($response->getResult() as $data) {
+            $peer = new PeerInfo($data);
+
+            $peers[] = $peer;
+        }
+
+        return $peers;
     }
 
     /**
