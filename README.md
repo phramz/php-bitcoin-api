@@ -23,6 +23,10 @@ or via command line
 php composer.phar require phramz/php-bitcoin-api
 ```
 
+License
+-------
+
+This library is licensed under the MIT license. For further information see LICENSE file.
 
 Examples
 ------
