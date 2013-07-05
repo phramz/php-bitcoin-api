@@ -43,15 +43,9 @@ class BitcoindClientTest extends AbstractTestCase
 
     protected $fixture = null;
 
-    public function setUp()
+    private function setUpFixture($fixture)
     {
-        $this->connection = $this->getMockBuilder('Phramz\Bitcoin\Api\Connection\Connection')
-            ->getMockForAbstractClass();
-
-        $this->response = $this->getMockBuilder('Phramz\Bitcoin\Api\Response\Response')
-            ->getMockForAbstractClass();
-
-        $this->fixture = $this->getJsonFixture('response_getinfo');
+        $this->fixture = $this->getJsonFixture($fixture);
 
         $this->response->expects($this->any())
             ->method('getContent')
@@ -64,6 +58,15 @@ class BitcoindClientTest extends AbstractTestCase
         $this->response->expects($this->any())
             ->method('getResult')
             ->will($this->returnValue($this->fixture['result']));
+    }
+
+    public function setUp()
+    {
+        $this->response = $this->getMockBuilder('Phramz\Bitcoin\Api\Response\Response')
+            ->getMockForAbstractClass();
+
+        $this->connection = $this->getMockBuilder('Phramz\Bitcoin\Api\Connection\Connection')
+            ->getMockForAbstractClass();
 
         $this->connection->expects($this->any())
             ->method('query')
@@ -81,6 +84,8 @@ class BitcoindClientTest extends AbstractTestCase
     public function testGetInfo()
     {
         $test = new BitcoindClient($this->connection);
+        $this->setUpFixture('response_getinfo');
+
         $response = $test->getInfo();
 
         $this->assertInstanceOf('Phramz\Bitcoin\Api\Response\Data\ServerInfo', $response);
@@ -89,12 +94,8 @@ class BitcoindClientTest extends AbstractTestCase
     public function testGetBalance()
     {
         $test = new BitcoindClient($this->connection);
-        $response = $test->getBalance();
+        $this->setUpFixture('response_getbalance');
 
-        $this->assertInstanceOf('Phramz\Bitcoin\Api\Response\Response', $response);
-        $this->assertEquals($this->fixture, $response->getContent());
-
-        $this->assertEquals($this->fixture['error'], $response->getError());
-        $this->assertEquals($this->fixture['result'], $response->getResult());
+        $this->assertEquals($this->fixture['result'], $test->getBalance());
     }
 }
