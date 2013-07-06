@@ -25,6 +25,7 @@ namespace Phramz\Bitcoin\Api\Connection;
 
 use Buzz\Browser;
 use Buzz\Message\Response;
+use Phramz\Bitcoin\Api\Exception\AuthenticationException;
 use Phramz\Bitcoin\Api\Exception\TransportException;
 use Phramz\Bitcoin\Api\Request\Request;
 use Phramz\Bitcoin\Api\Response\JsonResponse;
@@ -73,14 +74,20 @@ class BuzzConnection extends AbstractConnection
         }
 
         if ($response instanceof Response) {
-            if ($response->getStatusCode() != 200) {
-                throw new TransportException(
-                    "query failed due to invalid response status! [".$response->getStatusCode()."]",
-                    $response->getStatusCode()
-                );
+            if ($response->getStatusCode() == 401) {
+                throw new AuthenticationException("authentication failed!");
             }
 
-            return new JsonResponse($response->getContent());
+            $jsonResponse = new JsonResponse($response->getContent());
+
+            if ($response->getStatusCode() == 200 || $jsonResponse->getError()) {
+                return $jsonResponse;
+            }
+
+            throw new TransportException(
+                "query failed due to invalid response status! [".$response->getStatusCode()."]",
+                $response->getStatusCode()
+            );
         }
 
         throw new TransportException("query failed due to empty response message!");
