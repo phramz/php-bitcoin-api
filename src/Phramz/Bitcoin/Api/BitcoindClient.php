@@ -218,7 +218,12 @@ class BitcoindClient implements Client
      */
     public function getAccount($bitcoinaddress)
     {
-        // TODO: Implement getAccount() method.
+        $param = array($bitcoinaddress);
+
+        $request = new JsonRequest('getaccount', $param);
+        $response = $this->query($request);
+
+        return $response->getResult();
     }
 
     /**
@@ -227,7 +232,12 @@ class BitcoindClient implements Client
      */
     public function getAccountAddress($account)
     {
-        // TODO: Implement getAccountAddress() method.
+        $param = array($account);
+
+        $request = new JsonRequest('getaccountaddress', $param);
+        $response = $this->query($request);
+
+        return $response->getResult();
     }
 
     /**

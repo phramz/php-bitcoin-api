@@ -200,7 +200,7 @@ interface Client
      * Returns the account associated with the given address.
      *
      * @param string $bitcoinaddress
-     * @return JsonResponse
+     * @return string the account
      * @throws Exception\BitcoinException
      */
     public function getAccount($bitcoinaddress);
@@ -210,7 +210,7 @@ interface Client
      * Returns the current Bitcoin address for receiving payments to this account.
      *
      * @param string $account
-     * @return JsonResponse
+     * @return string the bitcoinaddress
      * @throws Exception\BitcoinException
      */
     public function getAccountAddress($account);
