@@ -20,27 +20,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-namespace Phramz\Bitcoin\Api\Connection;
 
-use Phramz\Bitcoin\Api\Exception\TransportException;
-use Phramz\Bitcoin\Api\Request\Request;
-use Phramz\Bitcoin\Api\Response\Response;
+namespace Phramz\Bitcoin\Api\Exception;
 
 /**
- * Class Connection
- * @package Phramz\Bitcoin\Api\Connection
+ * Class TransportException
+ * @package Phramz\Bitcoin\Api\Exception
  */
-interface Connection
+class TransportException extends BitcoinException
 {
-    public function getHost();
-    public function getPort();
-    public function getUsername();
-    public function getPassword();
-
-    /**
-     * @param Request $request
-     * @return Response
-     * @throws TransportException
-     */
-    public function query(Request $request);
 }

@@ -24,6 +24,8 @@
 namespace Phramz\Bitcoin\Api\Connection;
 
 use Buzz\Browser;
+use Buzz\Message\Response;
+use Phramz\Bitcoin\Api\Exception\TransportException;
 use Phramz\Bitcoin\Api\Request\Request;
 use Phramz\Bitcoin\Api\Response\JsonResponse;
 
@@ -51,15 +53,36 @@ class BuzzConnection extends AbstractConnection
      */
     public function query(Request $request)
     {
-        $response = $this->browser->post(
-            'http://'. $this->host . ':' . $this->port,
-            array (
-                'Content-type' => 'application/json',
-                'Authorization: Basic '.base64_encode($this->username.':'.$this->password)
-            ),
-            $request->getContent()
-        );
+        $response = null;
 
-        return new JsonResponse($response->getContent());
+        try {
+            $response = $this->browser->post(
+                'http://'. $this->host . ':' . $this->port,
+                array (
+                    'Content-type' => 'application/json',
+                    'Authorization: Basic '.base64_encode($this->username.':'.$this->password)
+                ),
+                $request->getContent()
+            );
+        } catch (\Exception $ex) {
+            throw new TransportException(
+                "query failed due to underlaying error: " . $ex->getMessage(),
+                $ex->getCode(),
+                $ex
+            );
+        }
+
+        if ($response instanceof Response) {
+            if ($response->getStatusCode() != 200) {
+                throw new TransportException(
+                    "query failed due to invalid response status! [".$response->getStatusCode()."]",
+                    $response->getStatusCode()
+                );
+            }
+
+            return new JsonResponse($response->getContent());
+        }
+
+        throw new TransportException("query failed due to empty response message!");
     }
 }
