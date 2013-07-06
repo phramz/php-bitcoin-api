@@ -106,4 +106,12 @@ class BitcoindClientTest extends AbstractTestCase
 
         $this->assertEquals($this->fixture['result'], $test->listAccounts());
     }
+
+    public function testGetNewAddress()
+    {
+        $test = new BitcoindClient($this->connection);
+        $this->setUpFixture('response_getnewaddress');
+
+        $this->assertEquals($this->fixture['result'], $test->getNewAddress());
+    }
 }
