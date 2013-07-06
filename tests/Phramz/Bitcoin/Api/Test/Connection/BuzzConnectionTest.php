@@ -51,8 +51,13 @@ class BuzzConnectionTest extends \PHPUnit_Framework_TestCase
         $this->request = $this->getMockBuilder('Phramz\Bitcoin\Api\Request\Request')
             ->getMockForAbstractClass();
 
-        $this->response = $this->getMockBuilder('Buzz\Message\MessageInterface')
-            ->getMockForAbstractClass();
+        $this->response = $this->getMockBuilder('Buzz\Message\Response')
+            ->setMethods(array('getContent', 'getStatusCode'))
+            ->getMock();
+
+        $this->response->expects($this->any())
+            ->method('getStatusCode')
+            ->will($this->returnValue(200));
 
         $this->browser = $this->getMockBuilder('Buzz\Browser')
             ->disableOriginalConstructor()
