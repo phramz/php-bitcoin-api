@@ -29,6 +29,7 @@ use Phramz\Bitcoin\Api\Request\Request;
 use Phramz\Bitcoin\Api\Response\Data\Block;
 use Phramz\Bitcoin\Api\Response\Data\MiningInfo;
 use Phramz\Bitcoin\Api\Response\Data\PeerInfo;
+use Phramz\Bitcoin\Api\Response\Data\RawTransaction;
 use Phramz\Bitcoin\Api\Response\Data\ServerInfo;
 
 /**
@@ -137,24 +138,6 @@ class BitcoindClient implements Client
 
     /**
      * (non-PHPdoc)
-     * @see Client::addMultiSigAddress()
-     */
-    public function addMultiSigAddress($nrequired, array $keys, $account = null)
-    {
-        // TODO: Implement addMultiSigAddress() method.
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see Client::createMultiSig()
-     */
-    public function createMultiSig($nrequired, array $keys)
-    {
-        // TODO: Implement createMultiSig() method.
-    }
-
-    /**
-     * (non-PHPdoc)
      * @see Client::addNode()
      */
     public function addNode($node, $action = self::NODE_ADD)
@@ -181,24 +164,6 @@ class BitcoindClient implements Client
 
     /**
      * (non-PHPdoc)
-     * @see Client::createRawTransaction()
-     */
-    public function createRawTransaction(array $txIds, array $amounts)
-    {
-        // TODO: Implement createRawTransaction() method.
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see Client::decodeRawTransaction()
-     */
-    public function decodeRawTransaction($hexString)
-    {
-        // TODO: Implement decodeRawTransaction() method.
-    }
-
-    /**
-     * (non-PHPdoc)
      * @see Client::dumpPrivateKey()
      */
     public function dumpPrivateKey($bitcoinaddress)
@@ -209,15 +174,6 @@ class BitcoindClient implements Client
         $response = $this->query($request);
 
         return $response->getResult();
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see Client::encryptWallet()
-     */
-    public function encryptWallet($passphrase)
-    {
-        // TODO: Implement encryptWallet() method.
     }
 
     /**
@@ -246,15 +202,6 @@ class BitcoindClient implements Client
         $response = $this->query($request);
 
         return $response->getResult();
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see Client::getAddedNodeInfo()
-     */
-    public function getAddedNodeInfo($dns, $node = null)
-    {
-        // TODO: Implement getAddedNodeInfo() method.
     }
 
     /**
@@ -295,15 +242,6 @@ class BitcoindClient implements Client
         $response = $this->query($request);
 
         return $response->getResult();
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see Client::getBlockTemplate()
-     */
-    public function getBlockTemplate(array $params)
-    {
-        // TODO: Implement getBlockTemplate() method.
     }
 
     /**
@@ -383,6 +321,114 @@ class BitcoindClient implements Client
         }
 
         return $peers;
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Client::addMultiSigAddress()
+     */
+    public function addMultiSigAddress($nrequired, array $keys, $account = null)
+    {
+        // TODO: Implement addMultiSigAddress() method.
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Client::createMultiSig()
+     */
+    public function createMultiSig($nrequired, array $keys)
+    {
+        // TODO: Implement createMultiSig() method.
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Client::createRawTransaction()
+     */
+    public function createRawTransaction(array $txIds, array $amounts)
+    {
+        // TODO: Implement createRawTransaction() method.
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Client::decodeRawTransaction()
+     */
+    public function decodeRawTransaction($hexString)
+    {
+        // TODO: Implement decodeRawTransaction() method.
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Client::getBlockTemplate()
+     */
+    public function getBlockTemplate(array $params)
+    {
+        // TODO: Implement getBlockTemplate() method.
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Client::getAddedNodeInfo()
+     */
+    public function getAddedNodeInfo($dns, $node = null)
+    {
+        // TODO: Implement getAddedNodeInfo() method.
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Client::encryptWallet()
+     */
+    public function encryptWallet($passphrase)
+    {
+        // TODO: Implement encryptWallet() method.
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Client::getRawMemPool()
+     */
+    public function getRawMemPool()
+    {
+        // TODO: Implement getRawMemPool() method.
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Client::getRawTransactionAsString()
+     */
+    public function getRawTransactionAsString($txid)
+    {
+        // TODO: Implement getRawTransactionAsString() method.
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Client::getRawTransaction()
+     */
+    public function getRawTransaction($txid)
+    {
+        // TODO: Implement getRawTransaction() method.
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Client::getReceivedByAccount()
+     */
+    public function getReceivedByAccount($account, $minconf = 1)
+    {
+        // TODO: Implement getReceivedByAccount() method.
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Client::getReceivedByAddress()
+     */
+    public function getReceivedByAddress($bitcoinaddress, $minconf = 1)
+    {
+        // TODO: Implement getReceivedByAddress() method.
     }
 
     /**

@@ -24,6 +24,7 @@ namespace Phramz\Bitcoin\Api;
 
 use Phramz\Bitcoin\Api\Response\Data\Block;
 use Phramz\Bitcoin\Api\Response\Data\MiningInfo;
+use Phramz\Bitcoin\Api\Response\Data\RawTransaction;
 use Phramz\Bitcoin\Api\Response\Data\ServerInfo;
 use Phramz\Bitcoin\Api\Response\JsonResponse;
 
@@ -337,4 +338,57 @@ interface Client
      * @throws Exception\BitcoinException
      */
     public function getPeerInfo();
+
+    /**
+     * getrawmempool
+     * Returns all transaction ids in memory pool.
+     *
+     * @return array of txids
+     * @throws Exception\BitcoinException
+     */
+    public function getRawMemPool();
+
+    /**
+     * getrawtransaction <txid> 0
+     * Returns a string that is serialized, hex-encoded data for <txid>.
+     *
+     * @param string $txid
+     * @return mixed
+     * @throws Exception\BitcoinException
+     */
+    public function getRawTransactionAsString($txid);
+
+    /**
+     * getrawtransaction <txid> 1
+     * Returns an Object with information about <txid>.
+     *
+     * @param string $txid
+     * @return RawTransaction
+     * @throws Exception\BitcoinException
+     */
+    public function getRawTransaction($txid);
+
+    /**
+     * getreceivedbyaccount <account> [minconf=1]
+     * Returns the total amount received by addresses with <account> in transactions
+     * with at least [minconf] confirmations.
+     *
+     * @param $account
+     * @param int $minconf
+     * @return double
+     * @throws Exception\BitcoinException
+     */
+    public function getReceivedByAccount($account, $minconf = 1);
+
+    /**
+     * getreceivedbyaddress <bitcoinaddress> [minconf=1]
+     * Returns the total amount received by <bitcoinaddress> in transactions with at least [minconf] confirmations.
+     *
+     * @param $bitcoinaddress
+     * @param int $minconf
+     * @return double
+     * @throws Exception\BitcoinException
+     */
+    public function getReceivedByAddress($bitcoinaddress, $minconf = 1);
+
 }

@@ -24,10 +24,10 @@
 namespace Phramz\Bitcoin\Api\Response\Data;
 
 /**
- * Class Block
+ * Class RawTransaction
  * @package Phramz\Bitcoin\Api\Response\Data
  */
-class Block extends AbstractData
+class RawTransaction extends AbstractData
 {
     // TODO: Implement convenience methods.
 }
