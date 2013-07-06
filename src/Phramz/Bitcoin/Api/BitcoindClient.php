@@ -200,7 +200,12 @@ class BitcoindClient implements Client
      */
     public function dumpPrivateKey($bitcoinaddress)
     {
-        // TODO: Implement dumpPrivateKey() method.
+        $param = array($bitcoinaddress);
+
+        $request = new JsonRequest('dumpprivkey', $param);
+        $response = $this->query($request);
+
+        return $response->getResult();
     }
 
     /**

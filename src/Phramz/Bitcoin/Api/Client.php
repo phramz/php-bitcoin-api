@@ -180,7 +180,7 @@ interface Client
      * Reveals the private key corresponding to <bitcoinaddress>.
      *
      * @param string $bitcoinaddress
-     * @return JsonResponse
+     * @return string
      * @throws Exception\BitcoinException
      */
     public function dumpPrivateKey($bitcoinaddress);
