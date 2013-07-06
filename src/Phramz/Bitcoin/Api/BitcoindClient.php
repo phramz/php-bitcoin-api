@@ -173,7 +173,10 @@ class BitcoindClient implements Client
      */
     public function backupWallet($destination)
     {
-        // TODO: Implement backupWallet() method.
+        $param = array($destination);
+
+        $request = new JsonRequest('backupwallet', $param);
+        $this->query($request);
     }
 
     /**

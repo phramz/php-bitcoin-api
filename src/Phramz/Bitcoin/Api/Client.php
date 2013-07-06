@@ -81,7 +81,7 @@ interface Client
      * Safely copies wallet.dat to destination, which can be a directory or a path with filename.
      *
      * @param string $destination
-     * @return JsonResponse
+     * @return void
      * @throws Exception\BitcoinException
      */
     public function backupWallet($destination);
