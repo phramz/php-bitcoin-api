@@ -20,22 +20,21 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+namespace Phramz\Bitcoin\Api\Test\Exception;
 
-namespace Phramz\Bitcoin\Api\Test;
+use Phramz\Bitcoin\Api\Exception\TransportException;
+use Phramz\Bitcoin\Api\Test\AbstractTestCase;
 
 /**
- * Class AbstractTestCase
- * @package Phramz\Bitcoin\Api\Test
+ * Class AuthenticationExceptionTest
+ * @package Phramz\Bitcoin\Api\Test\Exception
+ * @covers Phramz\Bitcoin\Api\Exception\TransportException
  */
-class AbstractTestCase extends \PHPUnit_Framework_TestCase
+class TransportExceptionTest extends AbstractTestCase
 {
-    protected function getJsonFixture($file)
+    public function testConstruct()
     {
-        return json_decode($this->getJsonFixtureRaw($file), true);
-    }
-
-    protected function getJsonFixtureRaw($file)
-    {
-        return file_get_contents(__DIR__ . '/../../../../fixtures/' . $file . '.json');
+        $test = new TransportException("foo");
+        $this->assertInstanceOf('Phramz\Bitcoin\Api\Exception\BitcoinException', $test);
     }
 }

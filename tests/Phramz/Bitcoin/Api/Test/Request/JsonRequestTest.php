@@ -47,10 +47,32 @@ class JsonRequestTest extends \PHPUnit_Framework_TestCase
         $this->assertNotEmpty($test->getId());
     }
 
+    public function testGetMethod()
+    {
+        $test = new JsonRequest('test', array('foo'), 'bar');
+
+        $this->assertEquals('test', $test->getMethod());
+    }
+
+    public function testGetParams()
+    {
+        $test = new JsonRequest('test', array('foo'), 'bar');
+
+        $this->assertEquals(array('foo'), $test->getParams());
+    }
+
+    public function testGetId()
+    {
+        $test = new JsonRequest('test', array('foo'), 'bar');
+
+        $this->assertEquals('bar', $test->getId());
+    }
+
     public function testToJson()
     {
         $test = new JsonRequest('test', array('foo'), 'bar');
 
         $this->assertEquals('{"jsonrpc":"1.0","id":"bar","method":"test","params":["foo"]}', $test->toJson());
+        $this->assertEquals('{"jsonrpc":"1.0","id":"bar","method":"test","params":["foo"]}', $test->getContent());
     }
 }

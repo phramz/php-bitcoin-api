@@ -23,13 +23,14 @@
 namespace Phramz\Bitcoin\Api\Test\Connection;
 
 use Phramz\Bitcoin\Api\Connection\BuzzConnection;
+use Phramz\Bitcoin\Api\Test\AbstractTestCase;
 
 /**
  * Class BuzzConnectionTest
  * @package Phramz\Bitcoin\Api\Test\Connection
  * @covers Phramz\Bitcoin\Api\Connection\BuzzConnection<extended>
  */
-class BuzzConnectionTest extends \PHPUnit_Framework_TestCase
+class BuzzConnectionTest extends AbstractTestCase
 {
     /**
      * @var \PHPUnit_Framework_MockObject_MockObject
@@ -55,10 +56,6 @@ class BuzzConnectionTest extends \PHPUnit_Framework_TestCase
             ->setMethods(array('getContent', 'getStatusCode'))
             ->getMock();
 
-        $this->response->expects($this->any())
-            ->method('getStatusCode')
-            ->will($this->returnValue(200));
-
         $this->browser = $this->getMockBuilder('Buzz\Browser')
             ->disableOriginalConstructor()
             ->setMethods(array('post'))
@@ -80,6 +77,72 @@ class BuzzConnectionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($password, $test->getPassword());
     }
 
+    /**
+     * @expectedException \Phramz\Bitcoin\Api\Exception\TransportException
+     */
+    public function testQueryTransportException()
+    {
+        $this->browser->expects($this->any())
+            ->method('post')
+            ->will($this->throwException(new \Exception('foo')));
+
+        $test = new BuzzConnection($this->browser, 'foo', 'bar', 'bazz', 'foobar');
+        $test->query($this->request);
+    }
+
+    /**
+     * @expectedException \Phramz\Bitcoin\Api\Exception\AuthenticationException
+     */
+    public function testQueryAuthenticationException()
+    {
+        $this->browser->expects($this->any())
+            ->method('post')
+            ->will($this->returnValue($this->response));
+
+        $this->response->expects($this->any())
+            ->method('getStatusCode')
+            ->will($this->returnValue(401));
+
+        $test = new BuzzConnection($this->browser, 'foo', 'bar', 'bazz', 'foobar');
+        $test->query($this->request);
+    }
+
+    /**
+     * @expectedException \Phramz\Bitcoin\Api\Exception\TransportException
+     */
+    public function testQueryTransportExceptionInvalidStatusCode()
+    {
+        $json = $this->getJsonFixtureRaw('response_getbalance');
+
+        $this->browser->expects($this->any())
+            ->method('post')
+            ->will($this->returnValue($this->response));
+
+        $this->response->expects($this->any())
+            ->method('getStatusCode')
+            ->will($this->returnValue(500));
+
+        $this->response->expects($this->atLeastOnce())
+            ->method('getContent')
+            ->will($this->returnValue($json));
+
+        $test = new BuzzConnection($this->browser, 'foo', 'bar', 'bazz', 'foobar');
+        $test->query($this->request);
+    }
+
+    /**
+     * @expectedException \Phramz\Bitcoin\Api\Exception\TransportException
+     */
+    public function testQueryTransportExceptionInvalidResponse()
+    {
+        $this->browser->expects($this->any())
+            ->method('post')
+            ->will($this->returnValue(new \stdClass()));
+
+        $test = new BuzzConnection($this->browser, 'foo', 'bar', 'bazz', 'foobar');
+        $test->query($this->request);
+    }
+
     public function testQuery()
     {
         $host = '127.0.0.1';
@@ -87,7 +150,11 @@ class BuzzConnectionTest extends \PHPUnit_Framework_TestCase
         $username = 'foo';
         $password = 'bar';
 
-        $json = '{"result":0.00000000,"error":null,"id":"d3d10d420ee9184b5b05be7ea46aa828"}';
+        $json = $this->getJsonFixtureRaw('response_getbalance');
+
+        $this->response->expects($this->any())
+            ->method('getStatusCode')
+            ->will($this->returnValue(200));
 
         $this->request->expects($this->atLeastOnce())
             ->method('getContent')
