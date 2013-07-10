@@ -72,7 +72,7 @@ interface Client
      *
      * @param string $node
      * @param string $action [add|remove|onetry]
-     * @return JsonResponse
+     * @return void
      * @throws Exception\BitcoinException
      */
     public function addNode($node, $action = self::NODE_ADD);
@@ -391,4 +391,195 @@ interface Client
      */
     public function getReceivedByAddress($bitcoinaddress, $minconf = 1);
 
+    /**
+     * gettransaction <txid>
+     * Get detailed information about in-wallet transaction <txid>
+     *
+     * @param $txid
+     * @return mixed
+     * @throws Exception\BitcoinException
+     */
+    public function getTransaction($txid);
+
+    /**
+     * gettxout <txid> <n> [includemempool=true]
+     * Returns details about an unspent transaction output.
+     *
+     * @param $txid
+     * @param $n
+     * @param bool $includemempool
+     * @return mixed
+     * @throws Exception\BitcoinException
+     */
+    public function getTxOut($txid, $n, $includemempool = true);
+
+    /**
+     * gettxoutsetinfo
+     * Returns statistics about the unspent transaction output set.
+     *
+     * @return mixed
+     * @throws Exception\BitcoinException
+     */
+    public function getTxOutSetInfo();
+
+    /**
+     * getwork [data]
+     *
+     * @param $data
+     * @return mixed
+     * @throws Exception\BitcoinException
+     */
+    public function getWork($data);
+
+    /**
+     * importprivkey <bitcoinprivkey> [label] [rescan=true]
+     * Adds a private key (as returned by dumpprivkey) to your wallet.
+     *
+     * @param string $bitcoinprivkey
+     * @param string|null $label
+     * @param bool $rescan
+     * @return mixed
+     * @throws Exception\BitcoinException
+     */
+    public function importPrivateKey($bitcoinprivkey, $label = null, $rescan = true);
+
+    /**
+     * keypoolrefill
+     * Fills the keypool.
+     *
+     * @return mixed
+     * @throws Exception\BitcoinException
+     */
+    public function keyPoolRefill();
+
+    /**
+     * listtransactions [account] [count=10] [from=0]
+     *
+     * @param null $account
+     * @param int $count
+     * @param int $from
+     * @return array of Transaction
+     * @throws Exception\BitcoinException
+     */
+    public function listTransactions($account = null, $count = 10, $from = 0);
+
+    /**
+     * listaddressgroupings
+     * Lists groups of addresses which have had their common ownership
+     * made public by common use as inputs or as the resulting change
+     * in past transactions
+     *
+     * @return mixed
+     * @throws Exception\BitcoinException
+     */
+    public function listAddressGroupings();
+
+    /**
+     * listlockunspent
+     * Returns list of temporarily unspendable outputs.
+     *
+     * @return mixed
+     * @throws Exception\BitcoinException
+     */
+    public function listLockUnspent();
+
+    /**
+     * listreceivedbyaccount [minconf=1] [includeempty=false]
+     * [minconf] is the minimum number of confirmations before payments are included.
+     * [includeempty] whether to include accounts that haven't received any payments.
+     * Returns an array of objects containing:
+     * "account" : the account of the receiving addresses
+     * "amount" : total amount received by addresses with this account
+     * "confirmations" : number of confirmations of the most recent transaction included
+     *
+     * @param int $minconf
+     * @param bool $includeempty
+     * @return mixed
+     * @throws Exception\BitcoinException
+     */
+    public function listReceivedByAccount($minconf = 1, $includeempty = false);
+
+    /**
+     * listreceivedbyaddress <bitcoinaddress> [minconf=1]
+     * [minconf] is the minimum number of confirmations before payments are included.
+     * [includeempty] whether to include addresses that haven't received any payments.
+     * Returns an array of objects containing:
+     * "address" : receiving address
+     * "account" : the account of the receiving address
+     * "amount" : total amount received by the address
+     * "confirmations" : number of confirmations of the most recent transaction included
+     *
+     * @param $bitcoinaddress
+     * @param bool $includeempty
+     * @internal param int $minconf
+     * @return mixed
+     * @throws Exception\BitcoinException
+     */
+    public function listReceivedByAddress($bitcoinaddress, $includeempty = false);
+
+    /**
+     * listsinceblock [blockhash] [target-confirmations]
+     * Get all transactions in blocks since block [blockhash], or all transactions if omitted
+     *
+     * @param $blockhash
+     * @param $targetConfirmations
+     * @return mixed
+     * @throws Exception\BitcoinException
+     */
+    public function listSinceBlock($blockhash = null, $targetConfirmations = null);
+
+    /**
+     * listunspent [minconf=1] [maxconf=9999999]  ["address",...]
+     * Returns array of unspent transaction outputs
+     * with between minconf and maxconf (inclusive) confirmations.
+     * Optionally filtered to only include txouts paid to specified addresses.
+     * Results are an array of Objects, each of which has:
+     * {txid, vout, scriptPubKey, amount, confirmations}
+     *
+     * @param int $minconf
+     * @param int $maxconf
+     * @param array $addresses
+     * @return mixed
+     * @throws Exception\BitcoinException
+     */
+    public function listUnspent($minconf = 1, $maxconf = 9999999, array $addresses = null);
+
+    /**
+     * lockunspent unlock? [array-of-Objects]
+     * Updates list of temporarily unspendable outputs.
+     *
+     * @param array $lock
+     * @return mixed
+     * @throws Exception\BitcoinException
+     */
+    public function lockUnspent(array $lock);
+
+    /**
+     * move <fromaccount> <toaccount> <amount> [minconf=1] [comment]
+     * Move from one account in your wallet to another.
+     *
+     * @param $fromaccount
+     * @param $toaccount
+     * @param $amount
+     * @param int $minconf
+     * @param string $comment
+     * @return mixed
+     * @throws Exception\BitcoinException
+     */
+    public function move($fromaccount, $toaccount, $amount, $minconf = 1, $comment = '');
+
+    /**
+     * sendfrom <fromaccount> <tobitcoinaddress> <amount> [minconf=1] [comment] [comment-to]
+     * <amount> is a real and is rounded to the nearest 0.00000001
+     *
+     * @param $fromaccount
+     * @param $tobitcoinaddress
+     * @param $amount
+     * @param int $minconf
+     * @param string $comment
+     * @param string $commentTo
+     * @return mixed
+     * @throws Exception\BitcoinException
+     */
+    public function sendFrom($fromaccount, $tobitcoinaddress, $amount, $minconf = 1, $comment = '', $commentTo = '');
 }

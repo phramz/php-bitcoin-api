@@ -432,6 +432,150 @@ class BitcoindClient implements Client
     }
 
     /**
+     * (non-PHPdoc)
+     * @see Client::getTransaction()
+     */
+    public function getTransaction($txid)
+    {
+        // TODO: Implement getTransaction() method.
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Client::getTxOut()
+     */
+    public function getTxOut($txid, $n, $includemempool = true)
+    {
+        // TODO: Implement getTxOut() method.
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Client::getTxOutSetInfo()
+     */
+    public function getTxOutSetInfo()
+    {
+        // TODO: Implement getTxOutSetInfo() method.
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Client::getWork()
+     */
+    public function getWork($data)
+    {
+        // TODO: Implement getWork() method.
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Client::importPrivateKey()
+     */
+    public function importPrivateKey($bitcoinprivkey, $label = null, $rescan = true)
+    {
+        // TODO: Implement importPrivateKey() method.
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Client::keyPoolRefill()
+     */
+    public function keyPoolRefill()
+    {
+        // TODO: Implement keyPoolRefill() method.
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Client::listTransactions()
+     */
+    public function listTransactions($account = null, $count = 10, $from = 0)
+    {
+        // TODO: Implement listTransactions() method.
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Client::listAddressGroupings()
+     */
+    public function listAddressGroupings()
+    {
+        // TODO: Implement listAddressGroupings() method.
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Client::listLockUnspent()
+     */
+    public function listLockUnspent()
+    {
+        // TODO: Implement listLockUnspent() method.
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Client::listReceivedByAccount()
+     */
+    public function listReceivedByAccount($minconf = 1, $includeempty = false)
+    {
+        // TODO: Implement listReceivedByAccount() method.
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Client::listReceivedByAddress()
+     */
+    public function listReceivedByAddress($bitcoinaddress, $includeempty = false)
+    {
+        // TODO: Implement listReceivedByAddress() method.
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Client::listSinceBlock()
+     */
+    public function listSinceBlock($blockhash = null, $targetConfirmations = null)
+    {
+        // TODO: Implement listSinceBlock() method.
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Client::listUnspent()
+     */
+    public function listUnspent($minconf = 1, $maxconf = 9999999, array $addresses = null)
+    {
+        // TODO: Implement listUnspent() method.
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Client::lockUnspent()
+     */
+    public function lockUnspent(array $lock)
+    {
+        // TODO: Implement lockUnspent() method.
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Client::move()
+     */
+    public function move($fromaccount, $toaccount, $amount, $minconf = 1, $comment = '')
+    {
+        // TODO: Implement move() method.
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Client::sendFrom()
+     */
+    public function sendFrom($fromaccount, $tobitcoinaddress, $amount, $minconf = 1, $comment = '', $commentTo = '')
+    {
+        // TODO: Implement sendFrom() method.
+    }
+
+    /**
      * Wrapper for connection->query ... implicit failure detection
      *
      * @param Request $request

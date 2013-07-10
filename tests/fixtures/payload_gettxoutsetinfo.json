@@ -1,0 +1,9 @@
+{
+    "height" : 245533,
+    "bestblock" : "00000000000000a4d1c00a82e31cecaea87a65ea76b8f09de71e64df9e8af6da",
+    "transactions" : 1960268,
+    "txouts" : 6544481,
+    "bytes_serialized" : 226511407,
+    "hash_serialized" : "929c9b760c9b4e7ce78cc799c769db1ffcb78b8e93ed799a435f142b96d3ed8c",
+    "total_amount" : 11388189.80331183
+}

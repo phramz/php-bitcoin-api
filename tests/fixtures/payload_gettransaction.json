@@ -1,0 +1,18 @@
+{
+    "amount" : 1.99000000,
+    "confirmations" : 23,
+    "blockhash" : "000000005260880fb77c6b471b5bf891c0eb7e52fea187c3b0262a1548670faf",
+    "blockindex" : 1,
+    "blocktime" : 1372860567,
+    "txid" : "946ad7ebb7736d4d578222e72072283496fcdb913b6a78c086ce24a9994531ec",
+    "time" : 1372178361,
+    "timereceived" : 1372178361,
+    "details" : [
+        {
+            "account" : "foo_1372175890",
+            "address" : "mobk1aKAtATDw6tr7UrkZMdHFGgA5xGkYf",
+            "category" : "receive",
+            "amount" : 1.99000000
+        }
+    ]
+}

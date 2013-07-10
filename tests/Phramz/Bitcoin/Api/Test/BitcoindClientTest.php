@@ -114,4 +114,128 @@ class BitcoindClientTest extends AbstractTestCase
 
         $this->assertEquals($this->fixture['result'], $test->getNewAddress());
     }
+
+    public function testGetAddressesByAccount()
+    {
+        $test = new BitcoindClient($this->connection);
+        $this->setUpFixture('response_getaddressesbyaccount');
+
+        $this->assertEquals($this->fixture['result'], $test->getAddressesByAccount('foo'));
+    }
+
+    public function testSendToAddress()
+    {
+        $test = new BitcoindClient($this->connection);
+        $this->setUpFixture('response_sendtoaddress');
+
+        $this->assertEquals($this->fixture['result'], $test->sendToAddress('foo', 0.01, 'bar', 'bazz'));
+    }
+
+    public function testDumpPrivateKey()
+    {
+        $test = new BitcoindClient($this->connection);
+        $this->setUpFixture('response_dumpprivkey');
+
+        $this->assertEquals($this->fixture['result'], $test->dumpPrivateKey('foo'));
+    }
+
+    public function testGetAccount()
+    {
+        $test = new BitcoindClient($this->connection);
+        $this->setUpFixture('response_getaccount');
+
+        $this->assertEquals($this->fixture['result'], $test->getAccount('foo'));
+    }
+
+    public function testGetAccountAddress()
+    {
+        $test = new BitcoindClient($this->connection);
+        $this->setUpFixture('response_getaccountaddress');
+
+        $this->assertEquals($this->fixture['result'], $test->getAccountAddress('foobar'));
+    }
+
+    public function testGetBlock()
+    {
+        $test = new BitcoindClient($this->connection);
+        $this->setUpFixture('response_getblock');
+
+        $result = $test->getBlock('fooo');
+
+        $this->assertInstanceOf('Phramz\Bitcoin\Api\Response\Data\Block', $result);
+    }
+
+    public function testGetBlockCount()
+    {
+        $test = new BitcoindClient($this->connection);
+        $this->setUpFixture('response_getblockcount');
+
+        $this->assertEquals($this->fixture['result'], $test->getBlockCount());
+    }
+
+    public function testGetBlockHash()
+    {
+        $test = new BitcoindClient($this->connection);
+        $this->setUpFixture('response_getblockhash');
+
+        $this->assertEquals($this->fixture['result'], $test->getBlockHash(2));
+    }
+
+    public function testGetConnectionCount()
+    {
+        $test = new BitcoindClient($this->connection);
+        $this->setUpFixture('response_getconnectioncount');
+
+        $this->assertEquals($this->fixture['result'], $test->getConnectionCount());
+    }
+
+    public function testGetDifficulty()
+    {
+        $test = new BitcoindClient($this->connection);
+        $this->setUpFixture('response_getdifficulty');
+
+        $this->assertEquals($this->fixture['result'], $test->getDifficulty());
+    }
+
+    public function testIsGenerate()
+    {
+        $test = new BitcoindClient($this->connection);
+        $this->setUpFixture('response_getgenerate');
+
+        $this->assertEquals($this->fixture['result'], $test->isGenerate());
+    }
+
+    public function testGetHashesPerSecond()
+    {
+        $test = new BitcoindClient($this->connection);
+        $this->setUpFixture('response_gethashespersec');
+
+        $this->assertEquals($this->fixture['result'], $test->getHashesPerSecond());
+    }
+
+    public function testGetMiningInfo()
+    {
+        $test = new BitcoindClient($this->connection);
+        $this->setUpFixture('response_getmininginfo');
+
+        $result = $test->getMiningInfo();
+
+        $this->assertInstanceOf('Phramz\Bitcoin\Api\Response\Data\MiningInfo', $result);
+    }
+
+    public function testGetPeerInfo()
+    {
+        $test = new BitcoindClient($this->connection);
+        $this->setUpFixture('response_getpeerinfo');
+
+        $result = $test->getPeerInfo();
+
+        $this->assertInternalType('array', $result);
+        $this->assertCount(count($this->fixture['result']), $result);
+
+        for ($i=0; $i < count($this->fixture['result']); $i++) {
+            $this->assertInstanceOf('Phramz\Bitcoin\Api\Response\Data\PeerInfo', $result[$i]);
+        }
+    }
+
 }
